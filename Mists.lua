@@ -47,5 +47,36 @@ end)
 
 map:HookScript("OnHide", function()
     print("Map is Closed!")
-    LoreFrame:Hide()
+    LoreFrame:Hide();
+end)
+
+local AddonButton = CreateFrame("Button", "AddonButton", Minimap)
+AddonButton:SetSize(32,32)
+AddonButton:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 0, 0)
+
+AddonButton:SetNormalTexture("Interface\\Icons\\Spell_Nature_Earthbind")
+AddonButton:GetNormalTexture():SetMask("Interface\\CharacterFrame\\TempPortraitAlphaMask")
+AddonButton:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Round")
+AddonButton:SetFrameStrata("HIGH")
+AddonButton:SetMovable(true)
+
+local border = AddonButton:CreateTexture(nil, "OVERLAY")
+border:SetTexture("Interface\\MINIMAP\\MiniMap-TrackingBorder")
+border:SetSize(70,70)
+border:SetPoint("CENTER", AddonButton, "CENTER", 15, -15)
+
+AddonButton:SetScript("OnEnter", function()
+    border:SetVertexColor(1, 0.8, 0.2) -- золотой
+    GameTooltip:SetOwner(AddonButton, "ANCHOR_RIGHT")
+    GameTooltip:SetText("Mists", 1, 1, 1)
+end)
+
+AddonButton:SetScript("OnLeave", function()
+    border:SetVertexColor(1, 1, 1)
+    GameTooltip:Hide()
+end)
+
+
+AddonButton:SetScript("OnClick", function ()
+ print("test")   
 end)
